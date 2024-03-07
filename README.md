@@ -9,4 +9,4 @@
 * inside the `\config` directory are two files:
   * `config.tex`: packages used, environment settings and some macro definitions
   * `cover.tex`: cover of the notebook
-* `\pictures`: all the pictures included wiil be put here
+* `\pictures`: all the pictures included will be put here

@@ -1,0 +1,38 @@
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{tikz}
+
+\geometry{left=1.2in, right=1.2in, top=1.5in, bottom=1.5in}
+\linespread{1.5}%行距
+
+% 设置列表环境的上下间距
+\setenumerate[1]{itemsep=5pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=5pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setdescription{itemsep=5pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+\theoremstyle{definition}
+\newtheorem{defn}{\textbf{\textit{def}}}[section]
+\newtheorem{prop}{\textbf{\textit{prop}}}[section]
+
+\newtheorem{lemma}{lemma}[section]% 引理 定理 推论 准则 共用一个编号计数
+\newtheorem{thm}[lemma]{\textbf{\textit{thm}}}
+\newtheorem{corollary}[lemma]{\textbf{\textit{corollary}}}
+\newtheorem{criterion}[lemma]{\textbf{\textit{criterion}}}
+
+\newtheorem{proposition}{\textbf{\textit{proposition}}}[section]
+\newtheorem{example}{\textbf{\textit{e.g.}}}[section]
+\newtheorem{exercises}{\textbf{\textit{exercises}}}[section]
+\newtheorem*{remark}{\textbf{\textit{remark}}}
+
+\newenvironment{solution}{\par{\textit{solution}}\;}{\qed\par}
+
+\def\R{\mathbb{R}} % 实数域
+\def\N{\mathbb{N}} % 自然数域
+\def\eps{\varepsilon} %ε

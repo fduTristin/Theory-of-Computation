@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1709778313 "e:/Latex/test/Theory of Computation/lesson2/lesson.tex" "lesson.pdf" "lesson" 1709778314 0
+["pdflatex"] 1709780275 "e:/Latex/test/Theory of Computation/lesson2/lesson.tex" "lesson.pdf" "lesson" 1709780276 0
   "../config/config.tex" 1709741400 1347 fea99dc0da94d4590a7964d9bfc57f63 ""
   "C:/Users/xhz/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1709735633 163091 f235bfef212b4a48ae4d3898fd6a92d4 ""
   "C:/Users/xhz/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1689510668 24101981 12eedf4e9161ced535c6d83b238c1428 ""
@@ -130,10 +130,10 @@
   "D:/Latex/tex/latex/tools/tabularx.sty" 1686255640 7147 d80d8cf72d313443d08c13c1af59c90f ""
   "D:/Latex/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "D:/Latex/tex/latex/xcolor/xcolor.sty" 1656236890 56148 51a9a8571c07b9921892ae11063ae853 ""
-  "e:/Latex/test/Theory of Computation/lesson2/lesson.tex" 1709778310 169 015540d8f0d918e7f6ea610d20a3c1d1 ""
-  "lesson.aux" 1709778314 663 d6f0d167fced3a31859a91c904f14cb6 "pdflatex"
-  "lesson.out" 1709778314 88 ba7811d986e2ff567e4a39730e476f87 "pdflatex"
-  "lesson.tex" 1709778310 169 015540d8f0d918e7f6ea610d20a3c1d1 ""
+  "e:/Latex/test/Theory of Computation/lesson2/lesson.tex" 1709780228 169 015540d8f0d918e7f6ea610d20a3c1d1 ""
+  "lesson.aux" 1709780276 663 d6f0d167fced3a31859a91c904f14cb6 "pdflatex"
+  "lesson.out" 1709780276 88 ba7811d986e2ff567e4a39730e476f87 "pdflatex"
+  "lesson.tex" 1709780228 169 015540d8f0d918e7f6ea610d20a3c1d1 ""
   (generated)
   "lesson.aux"
   "lesson.log"

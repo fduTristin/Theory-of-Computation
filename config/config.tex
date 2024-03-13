@@ -8,6 +8,7 @@
 \usepackage{amsmath}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
 
 \geometry{left=1.2in, right=1.2in, top=1.5in, bottom=1.5in}
 \linespread{1.5}%行距
@@ -20,9 +21,9 @@
 \theoremstyle{definition}
 \newtheorem{defn}{\textbf{\textit{def}}}[section]
 \newtheorem{prop}{\textbf{\textit{prop}}}[section]
+\newtheorem{thm}[defn]{\textbf{\textit{thm}}}
 
-\newtheorem{lemma}{lemma}[section]% 引理 定理 推论 准则 共用一个编号计数
-\newtheorem{thm}[lemma]{\textbf{\textit{thm}}}
+\newtheorem{lemma}{lemma}[section]% 引理 推论 准则 共用一个编号计数
 \newtheorem{corollary}[lemma]{\textbf{\textit{corollary}}}
 \newtheorem{criterion}[lemma]{\textbf{\textit{criterion}}}
 
@@ -35,4 +36,7 @@
 
 \def\R{\mathbb{R}} % 实数域
 \def\N{\mathbb{N}} % 自然数域
+\def\Q{\mathbb{Q}} % 有理数域
 \def\eps{\varepsilon} %ε
+
+\graphicspath{ {pictures/},{../pictures/}}  % 配置图形文件检索目录

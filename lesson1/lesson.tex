@@ -126,7 +126,7 @@
 \end{defn}
 
 \begin{defn}
-    \textit{(language) \textbf{Language} is a set of stirngs over an alphabet, That is, $L\subseteq \Sigma^*$.\\ \indent For example,$\emptyset,\Sigma^*,\Sigma$ are all languages}
+    \textit{(language) \textbf{Language} is a set of strings over an alphabet, That is, $L\subseteq \Sigma^*$.\\ \indent For example,$\emptyset,\Sigma^*,\Sigma$ are all languages}
     \begin{itemize}
         \item $\sigma = \{0,1\}$
         \item $Even = \{0,10,100,110,\cdots,\}$
@@ -202,15 +202,28 @@
 
 \begin{tikzpicture}
     % Draw circle
-    \draw (0,0) circle (5cm);
-    % Draw ellipse
-    \draw (0,1) ellipse (3cm and 2cm);
+    \draw (0,0) circle (7cm);
+    \draw (0,1) circle (5cm);
+    \draw (0,1.5) circle (4cm);
+    \draw (0,2) circle (3cm);
+    \draw (0,2.3) circle (2.3cm);
+    \draw (0,2.7) circle (1.3cm);
+
     % Add text
-    \node at (0,1) {decidable language};
-    \node at (0,-2) {$\cdot$ Hilbert $10^{th}$ problem};
-    \node at (0,-3) {$\cdot$ Turing halting problem};
-    \node at (6,3) {all languages $L \subseteq \Sigma^*$};
+    \node at (0,2.7) {$regular$};
+    \node at (0,1) {$*primality~testing$};
+    \node at (0,0.5) {$*maxflow$};
+    \node at (0,-0.5) {$P$};
+    \node at (0,-1.8) {$NP$};
+    \node at (0,-3.3) {$decidable ~ language$};
+    \node at (0,-5) {\textit{$\cdot$ Hilbert $10^{th}$ problem}};
+    \node at (0,-6) {\textit{$\cdot$ Turing halting problem}};
+    \node at (3,-8) {\textit{all languages $L \subseteq \Sigma^* = \{\eps,0,1,00,01,\cdots\}$}};
 \end{tikzpicture}
+
+\begin{remark}
+    \textit{\\\textbf{NP}: problems that are efficiently verifiable\\ \textbf{P}: problems that are efficiently solvable, i.e. solvable in $n^{O(1)}$ time\\\textbf{regular language}: problems that are solvable without memory,i.e. solvable by finite automation}
+\end{remark}
 
 \ifx\allfiles\undefined
 \end{document}

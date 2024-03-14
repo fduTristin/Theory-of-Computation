@@ -6,7 +6,7 @@
 \else
 \fi
 \section{Lesson 2}
-\subsection{Finite Automation}
+\subsection{Finite Automaton}
 \begin{example}
     \textit{Automatic Door\\}
     \begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
@@ -65,9 +65,9 @@
 
 
 \begin{defn}
-    \textit{(finite automation)}
+    \textit{(finite automaton)}
 
-    \textit{A \textbf{finite automation} is a 5-tuple ($Q,\Sigma,\delta,q_0,F$), where:}
+    \textit{A \textbf{finite automaton} is a 5-tuple ($Q,\Sigma,\delta,q_0,F$), where:}
 
     \begin{enumerate}
         \item \textit{Q is a finite set called the states}
@@ -79,7 +79,7 @@
 \end{defn}
 
 \begin{defn}
-    \textit{Let $M = (Q,\Sigma,\delta,q_0,F)$ be a finite automation, let w = $w_1w_2\cdots w_n$ be a string, where each $w_i \in \Sigma$.}
+    \textit{Let $M = (Q,\Sigma,\delta,q_0,F)$ be a finite automaton, let w = $w_1w_2\cdots w_n$ be a string, where each $w_i \in \Sigma$.}
 
     \textit{Then M accept w if there is a sequence of states $r_0,r_1,\cdots,r_n\in Q,$ such that:}
 
@@ -120,7 +120,7 @@
 
 \subsection{Regular Language}
 \begin{defn}
-    \textit{(regular language) $L \subseteq \Sigma^*$ is a \textbf{regular language} if there is a finite automation that accepts L}
+    \textit{(regular language) $L \subseteq \Sigma^*$ is a \textbf{regular language} if there is a finite automaton that accepts L}
 
     \textit{Let $A,B\subseteq\Sigma^*$, define:}
 
@@ -152,7 +152,7 @@
     \textit{If $A_1,A_2$ are regular languages, so is $A_1A_2$}
 
     \begin{itemize}
-        \item \textit{\textbf{DFA}: deterministic finite automation}
+        \item \textit{\textbf{DFA}: deterministic finite automaton}
         \item \textit{\textbf{NFA}: nondeterministic\dots}
     \end{itemize}
     

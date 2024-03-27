@@ -5,12 +5,12 @@
 \setcounter{section}{1}
 \else
 \fi
-\section{Lesson 2}
+\section{Automata and Language}
 \subsection{Finite Automaton}
 \begin{example}
     \textit{Automatic Door\\}
-    \begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
-        \node[state] (q0) {$closed$}; 
+    \bgpic    
+    \node[state] (q0) {$closed$}; 
         \node[state] (q1) [right=of q0] {$open$};
         \path[->]
             (q0) edge[loop left] node {$neither$} ()
@@ -19,9 +19,7 @@
             (q1) edge[bend left] node {$neither$} (q0); % 从 q1 到 q0 的转换
     \end{tikzpicture}
 
-    \begin{table}[htbp]
-        \centering
-        \begin{tabularx}{\textwidth}{XXXXX}
+    \bgtbl
             \toprule
         $~$ & $front$ & $rear$ & $both$ & $neither$ \\
         \midrule
@@ -35,9 +33,7 @@
 
 \begin{example}
     \textit{L = $\{w\in \{0,1\}^*|w = w_1w_2\cdots w_n,w_n = 0\}$\\}
-    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,semithick]
-        \tikzstyle{every state}=[fill=white,draw=black,text=black]
-      
+    \bgpic  
         \node[state,accepting] (A)                    {$q_0$};
         \node[state]         (B) [right of=A]       {$q_1$};
       
@@ -46,13 +42,13 @@
               (B) edge [bend left]  node {0} (A)
                   edge [loop below] node {1} (B);
     \end{tikzpicture}
+
     \begin{remark}
         \textit{$q_0:$ accepted state}
     \end{remark}
+
     \textit{$Q = \{q_0,q_1\},\Sigma = \{0,1\},\delta: Q\times \Sigma \rightarrow Q$}
-    \begin{table}[htbp]
-        \centering
-        \begin{tabularx}{\textwidth}{XXXXX}
+    \bgtbl
             \toprule
         $~$ & $0$ & $1$  \\
         \midrule
@@ -144,9 +140,11 @@
         \end{enumerate}
     \end{proof}
     \begin{remark}
-        \textit{so is $A\cap B$}
+        \textit{so is $A\cap B = \overline{\overline{A}\cup\overline{B}}$\footnote{\textit{proof of the closure under complement will be mentioned later}}}
     \end{remark}
 \end{thm}
+
+\subsection{DFA and NFA}
 
 \begin{thm}
     \textit{If $A_1,A_2$ are regular languages, so is $A_1A_2$}
@@ -159,9 +157,7 @@
     \textcolor{red}{\textbf{\textit{If at least one of these processes accepts, then the entire computation accepts.}}}
     \begin{example}
         \textit{NFA:\\}
-        \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,semithick]
-            \tikzstyle{every state}=[fill=white,draw=black,text=black]
-          
+        \bgpic
             \node[state,initial] (A)                    {$q_1$};
             \node[state]         (B) [below right of=A]       {$q_2$};
             \node[state]         (C) [above right of=B]       {$q_3$};
@@ -189,12 +185,14 @@
     \end{example}
 \end{thm}
 
+\begin{remark}
+    \textit{If a language can be accepted by DFA, then its time complexity is O(n), space complexity is O(1).}
+\end{remark}
+
 \begin{example}
-    \textit{Let A be the language consisting of all strings over $\{0,1\}$ containing a $1$ in the third position from the end (e.g., $000100$ is in A but $0011$ is not). The following four-state NFA recognizes A.\\}
+    \textit{Let A be the language consisting of all strings over $\{0,1\}$ containing a $1$ in the third position from the end (e.g., $000100$ is in A but $0011$ is not). The following four-state NFA recognizes A.}
     
-    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,semithick]
-        \tikzstyle{every state}=[fill=white,draw=black,text=black]
-    
+    \bgpic
         \node[state,initial] (A)                    {$q_0$};
         \node[state]         (B) [right of=A]       {$q_1$};
         \node[state]         (C) [right of=B]       {$q_2$};
@@ -209,9 +207,7 @@
 
 \begin{example}
     \textit{$L = \{0^k,2|k~or~3|k\}$\\}
-    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,semithick]
-        \tikzstyle{every state}=[fill=white,draw=black,text=black]
-      
+    \bgpic
         \node[state,initial] (A)                    {$q_0$};
         \node[state,accepting]         (B) [above right = 0.5cm and 1.5cm of A]       {$q_1$};
         \node[state]         (C) [right of=B]       {$q_2$};
@@ -237,11 +233,20 @@
     \begin{enumerate}
         \item \textit{Q is a finite set of states}
         \item \textit{$\Sigma$ is the alphabet}
-        \item \textit{$\delta: Q\times(\Sigma\cup\{\eps\})\rightarrow P(Q)$ is the transive funtion}
-        \item \textit{$a_0 \in Q$ is the start state}
+        \item \textit{$\delta: Q\times(\Sigma\cup\{\eps\})\rightarrow P(Q)$ is the transive function}
+        \item \textit{$q_0 \in Q$ is the start state}
         \item \textit{$F \subseteq Q$ is the set of accept states}
     \end{enumerate}
 \end{defn}
+
+\begin{remark}
+    \textit{$P(Q)$ is the collection of all the subsets of Q (power set)}
+\end{remark}
+
+\begin{itemize}
+    \item \textit{variant1: $\delta: Q\times\Sigma^*\rightarrow Q$\\We guarantee there is at most one applicable transition.}
+    \item \textit{variant2: If there are multiple applicable transitions,non-deterministically choose one.}
+\end{itemize}
 
 \begin{defn}
     \
@@ -255,13 +260,368 @@
     \end{enumerate}
 \end{defn}
 
+\begin{example}
+    \textit{$Q = \{q_0,q_1,q_2,q_3\},\Sigma = \{0,1\},F = \{q_3\},\delta:Q\times\Sigma\rightarrow Q$\\}
+    \bgpic
+        \node[state,initial] (A)                    {$q_0$};
+        \node[state]         (B) [right of=A]       {$q_1$};
+        \node[state]         (C) [right of=B]       {$q_2$};
+        \node[state,accepting]         (D) [right of=C]       {$q_3$};
+    
+        \path (A) edge              node {1} (B)
+                edge [loop above]   node {$0,1$} (A)
+              (B) edge              node {$0,\eps$} (C)
+              (C) edge              node {$1$} (D)
+              (D) edge[loop above]  node {$0,1$} (D);
+    \end{tikzpicture}
+
+    \bgtbl
+            \toprule
+        $q$\textbackslash$\Sigma$ & $0$ & $1$ &$\eps$  \\
+        \midrule
+        $q_0$ & $\{q_0\}$ & $\{q_0,q_1\}$ & $\emptyset$\\
+        $q_1$ & $\{q_2\}$ & $\emptyset$ & $\{q_2\}$\\
+        $q_2$ & $\emptyset$ & $\{q_3\}$ & $\emptyset$\\
+        $q_3$ & $\{q_3\}$ & $\{q_3\}$ & $\emptyset$\\
+            \bottomrule
+        \end{tabularx}
+    \end{table}
+\end{example}
+
 \begin{thm}
-    \textit{Every NFA has  an equivalent DFA}
+    \textit{Every NFA has an equivalent DFA}
 
     \begin{proof}
-        
+          \textit{Let $N = (Q,\Sigma,\delta,q_0,F)$ be the NFA recognizing A. Construct a DFA $M = (Q',\Sigma,\delta',q_0',F)$ recognizing A:\\ Let $E(R) = \{q\in Q|$ q can be reached from R by traveling along zero or more $\eps$ $ arrows\}$}
+
+          \textit{Define M as follows:}
+
+          \begin{enumerate}
+            \item $Q' = P(Q)$
+            \item \textit{For $R\in Q'$ and $a\in \Sigma$, let $\delta'(R,a) = \{q\in Q: q\in E(\delta(r,a))$ for some $r\in R\} = \bigcup_{r\in R} E(\delta(r,a))$}
+            \item $q_0' = E(\{q_0\})$
+            \item $F' = \{R\in Q',R\cap F \neq \emptyset\}$
+          \end{enumerate}
     \end{proof}
 \end{thm}
+
+\newpage
+\begin{example}
+    \textit{NFA\\}
+    \bgpic
+    \node[state,initial,accepting] (A)               {$q_0$};
+    \node[state]         (B) [below left of=A]       {$q_1$};
+    \node[state]         (C) [below right of=A]      {$q_2$};
+
+    \path (A) edge              node {1} (B)
+            edge [loop above]   node {$0,1$} (A)
+            edge [bend left]    node {$\eps$} (C)
+          (B) edge [bend right]  node {$0,1$} (C)
+            edge [loop below]   node {$0$} (B)
+          (C) edge [bend left]  node {0} (A);
+    \end{tikzpicture}
+
+    \textit{DFA\\}
+    \bgpic
+        \node[state]           (A)                  {$\emptyset$};
+        \node[state,accepting] (B) [right of=A]     {$q_0$};
+        \node[state]           (C) [right of=B]     {$q_1$};
+        \node[state,accepting] (D) [right of=C]     {$q_0,q_1$};
+        \node[state]           (E) [below of=A]     {$q_2$};
+        \node[state,accepting] (F) [below of=B]     {$q_0,q_2$};
+        \node[state]           (G) [below of=C]     {$q_1,q_2$};
+        \node[state,accepting] (H) [below of=D]     {$q_0,q_1,q_2$};
+
+        \path (A) edge [loop left]  node {$0,1$} (A)
+              (B) edge              node {$0$}   (A)
+                  edge              node {$1$}   (C)
+              (C) edge              node {$0$}   (G)
+                  edge              node {$1$}   (E)
+              (D) edge [bend right] node {$0,1$} (G)
+              (E) edge              node {$1$}   (A)
+                  edge              node {$0$}   (F)
+              (F) edge [loop right] node {$1$}   (A)
+                  edge              node {$1$}   (C)
+              (G) edge [bend left]  node {$1$}   (E)
+                  edge [bend left]  node {$0$}   (H)
+              (H) edge [loop right] node {$0$}   (H)
+                  edge [bend left]  node {$1$}   (G)
+        ;
+    \end{tikzpicture}
+\end{example}
+
+\begin{corollary}
+    \textit{A language is a regular language iff an NFA recognizes it.}
+\end{corollary}
+
+\newpage
+\setcounter{defn}{4}
+\begin{thm}
+    \textit{The class of regular languages is closed under union.\\Second proof }
+
+    \begin{proof}
+        \textit{See figure 3.}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.5]{2.3.png}
+            \caption{\textit{Construction of an NFA N to recognize $A_1 \cup A_2$}}
+        \end{figure}
+
+        \textit{Let $N_1 = (Q_1,\Sigma,\delta_1,q_1,F_1)$ recignize $A_1$ and $N_2 = (Q_2,\Sigma,\delta_2,q_2,F_2)$ recognize $A_2$}
+
+        \textit{Construct $N = (Q,\Sigma,\delta,q,F)$ as follows:}
+
+        \begin{enumerate}
+            \item $Q = Q_1\cup Q_2\cup \{q_0\}$
+            \item \textit{$q_0$ is the start state}
+            \item $F = F_1\cup F_2$
+            \item \textit{For $q\in Q,a\in \Sigma\cup\{\eps\}$.}
+            \[ 
+                Let ~ \delta(q,a) = 
+                \begin{cases}
+                    \delta_1(q,a) & q\in Q \\
+                    \delta_2(q,a) & q\in Q \\
+                    \{q_1,q_2\} & q = q_0 ~ and ~ a = \eps \\
+                    \emptyset & q = q_0 ~ and ~ a \neq \eps \\
+                \end{cases}
+            \]
+        \end{enumerate}
+    \end{proof}
+\end{thm}
+
+\newpage
+\setcounter{defn}{10}
+\begin{thm}
+    \textit{The class of regular languages is closed under concatenation.}
+    \begin{proof}
+        \textit{See figure 4.}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.5]{2.4.png}
+            \caption{\textit{Construction of an NFA N to recognize $A_1A_2$}}
+        \end{figure}
+        \textit{Let $N_1 = (Q_1,\Sigma,\delta_1,q_1,F_1)$ recignize $A_1$ and $N_2 = (Q_2,\Sigma,\delta_2,q_2,F_2)$ recognize $A_2$}
+
+        \textit{Construct $N = (Q,\Sigma,\delta,q,F)$ as follows:}
+
+        \begin{enumerate}
+            \item $Q = Q_1\cup Q_2$
+            \item \textit{$q_1$ is the start state}
+            \item $F = F_2$
+            \item \textit{For $q\in Q,a\in \Sigma\cup\{\eps\}$.}
+            \[ 
+                Let ~ \delta(q,a) = 
+                \begin{cases}
+                    \delta_1(q,a) & q\in Q_1~and~q\notin F_1 \\
+                    \delta_1(q,a) & q\in F_1~and~a\neq\eps \\
+                    \delta_1(q,a)\cup\{q_2\} & q\in F_1~and~a=\eps \\
+                    \delta_2(q,a) & q\in Q_2 \\
+                \end{cases}
+            \]
+        \end{enumerate}
+    \end{proof}
+\end{thm}
+
+\newpage
+\begin{thm}
+    \textit{The class of regular languages is closed under star.}
+    \begin{proof}
+        \textit{See figure 5.}
+        \begin{figure}
+            \centering
+            \includegraphics[scale = 0.5]{2.5.png}
+            \caption{\textit{Construction of an NFA N to recognize $A_1^*$}}
+        \end{figure}
+        \textit{Let $N_1 = (Q_1,\Sigma,\delta_1,q_1,F_1)$ recognize $A_1$}
+
+        \textit{Construct $N = (Q,\Sigma,\delta,q,F)$ as follows:}
+
+        \begin{enumerate}
+            \item $Q = Q_1\cup \{q_0\}$
+            \item \textit{$q_0$ is the start state}
+            \item $F = \{q_0\}\cup F_1$
+            \item \textit{For $q\in Q,a\in \Sigma\cup\{\eps\}$.}
+            \[ 
+                Let ~ \delta(q,a) = 
+                \begin{cases}
+                    \delta_1(q,a) & q\in Q_1~and~q\notin F_1 \\
+                    \delta_1(q,a) & q\in F_1~and~a\neq\eps \\
+                    \delta_1(q,a)\cup\{q_1\} & q\in F_1~and~a=\eps \\
+                    \{q_1\} & q = q_0 ~ and ~ a = \eps \\
+                    \emptyset & q = q_0 ~ and ~ a \neq \eps \\
+                \end{cases}
+            \]
+        \end{enumerate}
+    \end{proof}
+\end{thm}
+
+\begin{thm}
+    \textit{The class of regular languages is closed under complement.}
+    \begin{proof}
+        \textit{Let DFA $M = (Q,\Sigma,\delta,q_0,Q_{accept})$ recognizing A, then $\overline{A} = \Sigma^*-A$,\\ construct $M' = (Q,\Sigma,\delta,q_0,Q_{accept}'),Q_{accept}' = Q - Q_{accept}$, it's easy to prove $L(Q') = \overline{A}$.}
+    \end{proof}
+\end{thm}
+
+\subsection{Regular Expression}
+
+\begin{example}
+    \textit{Consider students' ID number, with boys' ending with an odd number, while girls' ending with even number.}
+
+    $boys:(0\cup1\cup\cdots\cup9)^*(1\cup3\cup5\cup7\cup9)$
+
+\end{example}
+
+\begin{defn}
+    \textit{(regular expression)}
+
+    \textit{R is a \textbf{regular expression} if R is: }
+
+    \begin{enumerate}
+        \item \textit{a for some $a\in \Sigma$}
+        \item $\eps$
+        \item $\emptyset$
+        \item \textit{$R_1\cup R_2$, where $R_1,R_2$ are regular expressions}
+        \item \textit{$R_1R_2$, where $R_1,R_2$ are regular expressions}
+        \item \textit{$R^*$, where R is a regular expression}
+    \end{enumerate}
+\end{defn}
+
+\begin{example}
+    \
+
+    \begin{enumerate}
+        \item $0^*10^*$  
+        \item $\Sigma^*1\Sigma^* = \{w|w = \cdots1\cdots\}$
+        \item $\Sigma^*001\Sigma^* = \{w|w = \cdots001\cdots\}$
+        \item \textit{$1^*(01^+)^*$ = \{$w\in \{0,1\}$, every 0 in w is followed by at least 1\}}
+        \item \textit{$(\Sigma\Sigma)^*$ = \{$w|$the length of w is even\}}
+        \item $1^*\emptyset = \emptyset$
+    \end{enumerate}
+\end{example}
+
+\begin{exercises}
+    \
+
+    \begin{enumerate}
+        \item \textit{w contains substring 110: $\{\Sigma^*110\Sigma^*\}$}
+        \item \textit{w doesn't contain 00 as substring: $(0\cup\eps)(1\cup10)^*$}
+        \item \textit{the number of 1s is a multiple of 3: $\{(0^*10^*10^*10^*)^*\}$}
+        \item \textit{w contains at least two 1s and one 0: $(\Sigma^*1\Sigma^*1\Sigma^*0\Sigma^*)\cup(\Sigma^*1\Sigma^*0\Sigma^*1\Sigma^*)\cup(\Sigma^*0\Sigma^*1\Sigma^*1\Sigma^*)$}
+    \end{enumerate}
+\end{exercises}
+
+\begin{thm}
+    \textit{A language is regular iff some regular expression described it}
+\end{thm}
+
+\newpage
+
+\begin{lemma}
+    \textit{$(\Leftarrow)$ If a language is decribed by a regular expression, then it's regular}
+    \begin{proof}
+        \textit{Let's convert R into an NFA N} 
+        \begin{enumerate}
+            \item \textit{$R = a,a\in \Sigma$}
+            
+            \
+
+            \bgpic
+                \node[initial,state]   (A) {};
+                \node[state,accepting] [right of=A] (B) {};
+
+                \path
+                    (A) edge node {$a$} (B)
+                ;
+            \end{tikzpicture}
+
+            \textit{  Note that this machine fits the definition of an NFA but not that of
+            a DFA because \textcolor{blue}{it has some states with no exiting arrow for each possible
+            input symbol}. Of course, we could have presented an equivalent DFA here;
+            but an NFA is all we need for now, and it is easier to describe.\\
+            Formally, N = $(\{q_1,q_2\},\Sigma,\delta,q_1,\{q_2\})$, where we describe $\delta$ by saying that $\delta(q_1, a) = \{q_2\}$ and that $\delta(r, b) = \emptyset$ for $r \neq q_1$ or $b \neq a$.
+            }
+
+            \item $R = \eps$
+            
+            \bgpic
+                \node[initial,state,accepting]   (A) {};
+            \end{tikzpicture}
+
+            \textit{Formally, N = $(\{q_1\},\Sigma,\delta,q_1,\{q_1\})$, where we describe $\delta$ by saying that $\delta(q_1, a) = \emptyset$ for $\forall r,b$.}
+            
+            \item $R = \emptyset$
+            
+            \
+            
+            \bgpic
+                \node[initial,state]   (A) {};
+            \end{tikzpicture}
+
+            \textit{Formally, N = $(\{q_1\},\Sigma,\delta,q_1,\emptyset)$, where we describe $\delta$ by saying that $\delta(q_1, a) = \emptyset$ for $\forall r,b$.}
+            
+            \item \textit{$R = R_1\cup R_2$}
+            \item \textit{$R = R_1R_2$}
+            \item \textit{$R = R_1^*$}
+
+            \textit{For the last three cases, we use the constructions given in the proofs that the
+            class of regular languages is closed under the regular operations. In other words,
+            we construct the NFA for R from the NFAs for $R_1$ and $R_2$ (or just $R_1$ in case 6)
+            and the appropriate closure construction.}
+        \end{enumerate}
+    \end{proof}
+\end{lemma}
+
+\begin{example}
+    $(ab\cup a)^*$
+
+    \
+
+    \bgpic
+        \node[initial,state]   (A) {};
+        \node[state] [right of=A] (B) {};
+        \node[state,accepting] [right of=B] (C) {};
+        \node[state,accepting] [below right of=A] (D) {};
+
+        \path
+            (A) edge node {$a$} (B)
+                edge node {$a$} (D)
+            (B) edge node {$b$} (C)
+            (C) edge [bend right] node {$\eps$} (A)
+            (D) edge [bend left] node {$\eps$} (A)
+        ;
+    \end{tikzpicture}
+
+    \textit{It can be simplified as below:}
+
+    \
+
+    \bgpic
+        \node[initial,state,accepting]   (A) {};
+        \node[state] [right of=A] (B) {};
+        \node[state,accepting] [right of=B] (C) {};
+
+        \path
+            (A) edge node {$a$} (B)
+                edge [bend left] node {$b$} (C)
+            (B) edge node {$b$} (C)
+            (C) edge [bend left] node {$\eps$} (A)
+        ;
+    \end{tikzpicture}
+
+    \textit{Or as this:}
+
+    \
+
+    \bgpic
+        \node[initial,state,accepting]   (A) {};
+        \node[state] [right of=A] (B) {};
+
+        \path
+            (A) edge node {$a$} (B)
+            (B) edge [bend left] node {$b,\eps$} (A)
+        ;
+    \end{tikzpicture}
+\end{example}
 \ifx\allfiles\undefined
 \end{document}
 \fi

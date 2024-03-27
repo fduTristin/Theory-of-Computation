@@ -22,12 +22,10 @@
 \newtheorem{defn}{\textbf{\textit{def}}}[section]
 \newtheorem{prop}{\textbf{\textit{prop}}}[section]
 \newtheorem{thm}[defn]{\textbf{\textit{thm}}}
+\newtheorem{corollary}[defn]{\textbf{\textit{corollary}}}
+\newtheorem{lemma}[defn]{\textit{lemma}}% 引理  准则 共用一个编号计数
+\newtheorem{criterion}[defn]{\textbf{\textit{criterion}}}
 
-\newtheorem{lemma}{lemma}[section]% 引理 推论 准则 共用一个编号计数
-\newtheorem{corollary}[lemma]{\textbf{\textit{corollary}}}
-\newtheorem{criterion}[lemma]{\textbf{\textit{criterion}}}
-
-\newtheorem{proposition}{\textbf{\textit{proposition}}}[section]
 \newtheorem{example}{\textbf{\textit{e.g.}}}[section]
 \newtheorem{exercises}{\textbf{\textit{exercises}}}[section]
 \newtheorem*{remark}{\textbf{\textit{remark}}}
@@ -39,4 +37,9 @@
 \def\Q{\mathbb{Q}} % 有理数域
 \def\eps{\varepsilon} %ε
 
+\def\bgtbl{\begin{table}[htbp]
+    \centering
+    \begin{tabularx}{\textwidth}{XXXXX}}
+\def\bgpic{\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,semithick]
+    \tikzstyle{every state}=[fill=white,draw=black,text=black]}
 \graphicspath{ {pictures/},{../pictures/}}  % 配置图形文件检索目录

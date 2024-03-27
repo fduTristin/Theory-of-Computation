@@ -10,3 +10,7 @@
   * `config.tex`: packages used, environment settings and some macro definitions
   * `cover.tex`: cover of the notebook
 * `\pictures`: all the pictures included will be put here
+
+#### Bug
+after compile the `note.tex` file, it will create empty directories in each lesson
+directory

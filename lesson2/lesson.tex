@@ -354,14 +354,12 @@
     \textit{A language is a regular language iff an NFA recognizes it.}
 \end{corollary}
 
-\newpage
 \setcounter{defn}{4}
 \begin{thm}
-    \textit{The class of regular languages is closed under union.\\Second proof }
-
+    \textit{The class of regular languages is closed under union.\\Second proof}
     \begin{proof}
         \textit{See figure 3.}
-        \begin{figure}
+        \begin{figure}[b]
             \centering
             \includegraphics[scale = 0.5]{2.3.png}
             \caption{\textit{Construction of an NFA N to recognize $A_1 \cup A_2$}}
@@ -389,13 +387,12 @@
     \end{proof}
 \end{thm}
 
-\newpage
 \setcounter{defn}{10}
 \begin{thm}
     \textit{The class of regular languages is closed under concatenation.}
     \begin{proof}
         \textit{See figure 4.}
-        \begin{figure}
+        \begin{figure}[b]
             \centering
             \includegraphics[scale = 0.5]{2.4.png}
             \caption{\textit{Construction of an NFA N to recognize $A_1A_2$}}
@@ -422,12 +419,12 @@
     \end{proof}
 \end{thm}
 
-\newpage
 \begin{thm}
     \textit{The class of regular languages is closed under star.}
     \begin{proof}
         \textit{See figure 5.}
-        \begin{figure}
+
+        \begin{figure}[H]
             \centering
             \includegraphics[scale = 0.5]{2.5.png}
             \caption{\textit{Construction of an NFA N to recognize $A_1^*$}}
@@ -514,8 +511,6 @@
     \textit{A language is regular iff some regular expression described it}
 \end{thm}
 
-\newpage
-
 \begin{lemma}
     \textit{$(\Leftarrow)$ If a language is decribed by a regular expression, then it's regular}
     \begin{proof}
@@ -571,6 +566,8 @@
     \end{proof}
 \end{lemma}
 
+\newpage
+
 \begin{example}
     $(ab\cup a)^*$
 
@@ -622,6 +619,215 @@
         ;
     \end{tikzpicture}
 \end{example}
+
+
+\textbf{\textit{Now let's turn to the other direction of the proof of Theorem 2.15.}}
+
+\begin{lemma}
+    \textit{$(\Rightarrow)$ If a language is regular, then it is described by a regular expression.}
+
+    \textbf{PROOF IDEA} \textit{We need to show that if a language A is regular, a regular
+    expression describes it. Because A is regular, it is accepted by a DFA. We describe
+    a procedure for converting DFAs into equivalent regular expressions.}
+
+    \begin{proof}
+        \textit{We break this procedure into two parts, using a new type of finite automaton
+        called a \textbf{generalized nondeterministic finite automaton}, \textbf{GNFA}.}
+
+        \textit{DFA $\rightarrow$ GNFA $\rightarrow$ regular expressions}
+    \end{proof}
+\end{lemma}
+
+\begin{defn}
+    \textit{A generalized nondeterministic finite automaton is a 5-tuple,
+    $(Q, \Sigma, \delta, q_{start}, q_{accept})$, where:}
+
+    \begin{enumerate}
+        \item \textit{Q is a finite set of states}
+        \item \textit{$\Sigma$ is the input alphabet}
+        \item \textit{$\delta:(Q-\{q_{accept}\})\times (Q-\{q_{start}\})\rightarrow R$ is the transive function}
+        \item \textit{$q_{start}$ is the start state}
+        \item \textit{$q_{accept}$ is the accept state}
+    \end{enumerate}
+
+    \begin{remark}
+        \textit{\textbf{GNFA} requires:}
+        \begin{enumerate}
+            \item \textit{The start state has transition arrows going to every other state but no arrows
+            coming in from any other state.}
+            \item \textit{There is only a single accept state, and it has arrows coming in from every
+            other state but no arrows going to any other state. Furthermore, the accept
+            state is not the same as the start state.}
+            \item \textit{Except for the start and accept states, one arrow goes from every state to
+            every other state and also from each state to itself.}
+        \end{enumerate}
+    \end{remark}
+\end{defn}
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[scale = 1]{2.6.png}
+    \end{center}
+    \caption{\textit{Typical stages in converting a DFA to a regular expression}}
+\end{figure}
+
+\textit{\textbf{\\Let's finish the proof for Lemma 2.17}}
+
+\begin{proof}
+    \
+    \begin{enumerate}
+        \item \textit{Add a new start state with $\eps$ arrow to the old start state}
+        \item \textit{Add a new accept state with $\eps$ arrow(s) from old accept states}
+        \item \textit{Replace multiple lables or arrows between two states with a single arrow whose label is the union of the previous lables}
+        \item \textit{Add arrows with $'\emptyset'$ between states that had no arrows}
+    \end{enumerate}
+    \newpage
+    \textit{\\Now consider convert \textbf{GNFA} to \textbf{regular expression}\\We use the procedure \textbf{CONVERT(G)}}
+    \begin{enumerate}
+        \item \textit{Let k be the number of states in $G$}
+        \item \textit{If $k = 2$, return $\delta(q_{start},q_{accept})$}
+        \item \textit{If $k > 2$, choose $q_{rip}\in Q \backslash \{q_{start},q_{accept}\} $}
+    
+
+    \textit{Let $G'$ be the GNFA $(Q', \Sigma, \delta', q_{start}, q_{accept})$, where:}
+
+    \begin{enumerate}
+        \item $Q' = Q-q_{rip}$
+        \item $\forall q_i \in Q'-\{q_{qccept}\},\forall q_j \in Q'-\{q_{start}\}$
+    \end{enumerate}
+
+    \textit{Then $\delta'(q_i,q_j) = \delta(q_i,q_j)\cup(\delta(q_i,q_{rip})\delta(q_{rip},q_{rip})^*\delta(q_{rip},q_j))$}
+
+    \textit{(see Figure7)}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[scale = 0.45]{2.7.png}
+        \end{center}
+        \caption{\textit{Constructing an equivalent GNFA with one fewer state}}
+    \end{figure}
+
+    \begin{remark}
+        $q_i=q_j ~ is ~ possible$
+    \end{remark}
+
+        \item \textit{compute convert$(G')$ and return}
+\end{enumerate}
+
+\begin{claim}
+    \textit{For any GNFA G, \textbf{CONVERT(G)} is equivalent to G.}
+    \begin{proof}
+        \textit{We prove this claim by induction on k, the number of states of the GNFA.}
+        
+        \textit{\textbf{Basis:}Prove the claim true for k = 2 states. If G has only two states, it can
+        have only a single arrow, which goes from the start state to the accept state. The
+        regular expression label on this arrow describes all the strings that allow G to get
+        to the accept state. Hence this expression is equivalent to G.}
+
+        \textit{\textbf{Induction step:} Assume that the claim is true for k - 1 states and use this assumption to prove that the claim is true for k states. First we show that G and
+        $G'$ recognize the same language. Suppose that G accepts an input w. Then in an
+        accepting branch of the computation, G enters a sequence of states: {$q_{start},q_1,q_2,\cdots,q_{accept}$}}
+
+        \textit{If none of them is the removed state $q_{rip}$, clearly $G'$ also accepts w. The reason is that each of the new regular expressions labeling the arrows of $G'$
+        contains the old regular expression as part of a union.}
+        
+        \textit{If $q_{rip}$ does appear, removing each run of consecutive $q_{rip}$ states forms an
+        accepting computation for $G'$. The states $q_i$ and $q_j$ bracketing a run have a new
+        regular expression on the arrow between them that describes all strings taking qi
+        to $q_j$ via $q_{rip}$ on G. So $G'$ accepts w.
+        }
+
+        \textit{Conversely omitted.}
+
+        \textit{The induction hypothesis states that when the algorithm calls itself recursively on input $G'$
+        , the result is a regular expression that is equivalent to $G'$
+        because $G'$ has k - 1 states. Hence this regular expression also is equivalent to
+        G, and the algorithm is proved correct}
+    \end{proof}
+\end{claim}
+    \textit{Thus \textbf{Lemma 2.17} and \textbf{Theorem 2.15} are proved}
+\end{proof}
+
+\begin{example}
+    \
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[scale = 0.36]{2.8.png}
+        \end{center}
+        \caption{\textit{Converting a two-state DFA to an equivalent regular expression}}
+    \end{figure}
+\end{example}
+
+\subsection{Nonregular Languages}
+
+\begin{example}
+    \textit{Consider a language B = $\{0^n1^n|n\geq0\}$}
+
+    \textit{If we attempt to find a DFA
+    that recognizes B, we discover that the machine seems to need to remember
+    how many 0s have been seen so far as it reads the input. Because the number of
+    0s isn't limited, the machine will have to keep track of an unlimited number of
+    possibilities. But it cannot do so with any finite number of states.}
+
+\end{example}
+
+\textit{\textbf{"Almost all languages are non-regular"}}
+
+\begin{lemma}
+    \textit{(\textbf{pumping lemma})}
+
+    \textit{If A is a regular language, then there is a number p (the
+    pumping length) where if s is any string in A of length at least p, then s may be
+    divided into three pieces, s = xyz, satisfying the following conditions:}
+
+    \begin{enumerate}
+        \item \textit{for each $i\geq0,xy^iz\in A$}
+        \item \textit{$|y| > 0$}
+        \item $|xy|\leq p$
+    \end{enumerate}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[scale = 0.8]{2.9.png}
+        \end{center}
+        \caption{\textit{Example showing how the strings x, y, and z affect M}}
+    \end{figure}
+    \newpage
+
+    \begin{proof}
+        \textit{Let $M = (Q,\Sigma,\delta,q_1,F)$ recognizing A and p be the number of states of M.}
+
+        \textit{Let $s = s_1s_2\cdots s_n$ be a string in A of length n, where $n\geq p$. Let $r_1,r_2,\cdots,r_{n+1}$ be the sequence of states that M enters while processing s,
+         so $r_{i+1} = \delta(r_i,s_i)$ for $1\leq i\leq n$. This sequence has length n + 1, which is at least p + 1. Among
+         the first p + 1 elements in the sequence, two must be the same state, by the
+         \textbf{pigeonhole principle}.We call the first of these $r_j$ and the second $r_l$. Because $r_l$
+         occurs among the first p + 1 places in a sequence starting at r1, we have $l \leq p + 1$.
+         \\Now let}
+
+         \[  
+            \begin{cases}
+                x = s_1\cdots s_{j-1}\\
+                y = s_j \cdots s_{l-1} \\
+                z = s_l\cdots s_n \\
+            \end{cases}
+        \]
+
+        \textit{it's easy to prove this satisfy 3 conditions}
+    \end{proof}
+\end{lemma}
+
+\begin{exercises}
+    \
+
+    \begin{enumerate}
+        \item \textit{$L = \{0^n1^n|n\geq0\}$ is non-regular}
+        \begin{proof}
+            \textit{Let n = p,consider $s = 0^n1^n$. By \textbf{pumping lemma}, write:}
+
+            \textit{$s = xyz,|xy|\leq p = n$, then $x,y=0^*,xy^iz\notin L, \forall i \neq 1$, contradiction!}
+        \end{proof}
+    \end{enumerate}
+\end{exercises}
 \ifx\allfiles\undefined
 \end{document}
 \fi

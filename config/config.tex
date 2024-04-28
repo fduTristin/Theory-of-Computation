@@ -1,4 +1,5 @@
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{amssymb}
@@ -8,7 +9,7 @@
 \usepackage{amsmath}
 \usepackage{enumitem}
 \usepackage{tikz}
-\usetikzlibrary{automata, positioning, arrows}
+\usetikzlibrary{shapes.geometric, automata, positioning, arrows, calc, arrows.meta}
 
 \geometry{left=1.2in, right=1.2in, top=1.5in, bottom=1.5in}
 \linespread{1.5}%行距
@@ -23,8 +24,9 @@
 \newtheorem{prop}{\textbf{\textit{prop}}}[section]
 \newtheorem{thm}[defn]{\textbf{\textit{thm}}}
 \newtheorem{corollary}[defn]{\textbf{\textit{corollary}}}
-\newtheorem{lemma}[defn]{\textit{lemma}}% 引理  准则 共用一个编号计数
+\newtheorem{lemma}[defn]{\textbf{\textit{lemma}}}
 \newtheorem{criterion}[defn]{\textbf{\textit{criterion}}}
+\newtheorem{claim}[defn]{\textbf{\textit{claim}}}
 
 \newtheorem{example}{\textbf{\textit{e.g.}}}[section]
 \newtheorem{exercises}{\textbf{\textit{exercises}}}[section]
@@ -35,6 +37,7 @@
 \def\R{\mathbb{R}} % 实数域
 \def\N{\mathbb{N}} % 自然数域
 \def\Q{\mathbb{Q}} % 有理数域
+\def\Z{\mathbb{Z}} % 整数域
 \def\eps{\varepsilon} %ε
 
 \def\bgtbl{\begin{table}[htbp]
@@ -42,4 +45,4 @@
     \begin{tabularx}{\textwidth}{XXXXX}}
 \def\bgpic{\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,semithick]
     \tikzstyle{every state}=[fill=white,draw=black,text=black]}
-\graphicspath{ {pictures/},{../pictures/}}  % 配置图形文件检索目录
+\graphicspath{{pictures/},{../pictures/}}  % 配置图形文件检索目录
